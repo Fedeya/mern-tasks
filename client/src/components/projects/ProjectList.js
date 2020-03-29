@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import Project from './Project';
+import projectContext from '../../context/projects/projectContext';
 
 import projectContext from '../../context/projects/projectContext';
 
