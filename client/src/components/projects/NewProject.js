@@ -11,7 +11,7 @@ function NewProject() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if(name === '') {
+    if(name.trim() === '') {
       setError(true);
       return;
     }
