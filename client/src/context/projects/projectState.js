@@ -4,12 +4,13 @@ import * as uuid from 'uuid';
 import projectContext from './projectContext';
 import projectReducer from './projectReducer';
 
-import { OPEN_FORM, GET_PROJECTS, ADD_PROJECT } from '../../types';
+import { OPEN_FORM, GET_PROJECTS, ADD_PROJECT, ACTIVE_PROJECT } from '../../types';
 
 function ProjectState(props) {
   const initialState = {
     openForm: false,
-    projects: []
+    projects: [],
+    project: null
   };
 
   const [state, dispatch] = useReducer(projectReducer, initialState);
@@ -38,14 +39,23 @@ function ProjectState(props) {
     });
   }
 
+  const activeProject = project => {
+    dispatch({
+      type: ACTIVE_PROJECT,
+      payload: project
+    });
+  }
+
   return (
     <projectContext.Provider
       value={{
         openForm: state.openForm,
         projects: state.projects,
+        project: state.project,
         showForm,
         getProjects,
-        addProject
+        addProject,
+        activeProject
       }}
     >
       {props.children}
