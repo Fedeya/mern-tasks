@@ -5,12 +5,18 @@ import projectContext from '../../context/projects/projectContext';
 function NewProject() {
 
   const [name, setName] = useState('');
+  const [error, setError] = useState(false);
   const { openForm, showForm, addProject } = useContext(projectContext);
 
   const handleSubmit = e => {
     e.preventDefault();
-    if(name === '') return;
 
+    if(name === '') {
+      setError(true);
+      return;
+    }
+
+    setError(false);
     addProject(name);
     setName('');
   }
@@ -39,6 +45,9 @@ function NewProject() {
 
           </form>
         )
+      }
+      {
+        error && <p className="error message">The name is required</p>
       }
 
     </Fragment>
