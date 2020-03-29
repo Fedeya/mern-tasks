@@ -12,7 +12,7 @@ function ListProjects() {
     <ul className="list-projects">
       {
         projects && projects.map(project => (
-          <Project project={project} key={project.name} />
+          <Project project={project} key={project.id} />
         ))
       }
     </ul>
