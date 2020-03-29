@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Project from './Project';
 
+import projectContext from '../../context/projects/projectContext';
+
 function ListProjects() {
 
-  const projects = [{ name: 'Tienda Virtual' }, { name: 'Web Design' }, { name: 'Mobile App' }];
+  const { projects } = useContext(projectContext);
 
   return (
     <ul className="list-projects">
