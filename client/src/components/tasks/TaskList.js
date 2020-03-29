@@ -19,7 +19,7 @@ function TaskList() {
           tasks && 
           tasks.length > 0 ? 
           tasks.map(task => (
-              <Task task={task} />
+              <Task task={task} key={task.name} />
           )) : (<li className="task">There is not tasks</li>)
         }
       </ul>
