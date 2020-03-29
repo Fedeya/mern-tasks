@@ -9,10 +9,10 @@ import { TASKS_PROJECT, ADD_TASK } from '../../types';
 function TaskState(props) {
   const initialState = {
     tasks: [
-      {name: 'Select Platform', state: true, projectId: 1},
-      {name: 'Select Colors', state: false, projectId: 1},
-      {name: 'Select Payment Platform', state: false, projectId: 2},
-      {name: 'Select Hosting', state: true, projectId: 3}
+      {id: 1, name: 'Select Platform', state: true, projectId: 1},
+      {id: 2, name: 'Select Colors', state: false, projectId: 1},
+      {id: 3, name: 'Select Payment Platform', state: false, projectId: 2},
+      {id: 4, name: 'Select Hosting', state: true, projectId: 3}
     ],
     projectTasks: null
   };
