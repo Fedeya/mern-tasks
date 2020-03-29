@@ -3,18 +3,13 @@ import React, { Fragment, useContext } from 'react';
 import Task from './Task';
 
 import projectContext from '../../context/projects/projectContext';
+import TaskContext from '../../context/tasks/taskContext';
 
 function TaskList() {
 
-  const tasks = [
-    {name: 'Select Platform', state: true},
-    {name: 'Select Colors', state: false},
-    {name: 'Select Payment Platform', state: false},
-    {name: 'Select Hosting', state: true}
-  ];
-
   const { project, deleteProject } = useContext(projectContext);
-  
+  const { tasks } = useContext(TaskContext);
+
   if(!project) return <h2>Select a project!</h2>;
 
   return (
