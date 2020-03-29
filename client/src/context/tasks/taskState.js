@@ -5,7 +5,12 @@ import TaskReducer from './taskReducer';
 
 function TaskState(props) {
   const initialState = {
-    tasks: []
+    tasks: [
+      {name: 'Select Platform', state: true, projectId: 1},
+      {name: 'Select Colors', state: false, projectId: 1},
+      {name: 'Select Payment Platform', state: false, projectId: 2},
+      {name: 'Select Hosting', state: true, projectId: 3}
+    ]
   };
 
   const [state, dispatch] = useReducer(TaskReducer, initialState);
