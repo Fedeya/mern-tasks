@@ -13,7 +13,7 @@ function TaskList() {
     {name: 'Select Hosting', state: true}
   ];
 
-  const { project } = useContext(projectContext);
+  const { project, deleteProject } = useContext(projectContext);
   
   if(!project) return <h2>Select a project!</h2>;
 
@@ -29,7 +29,10 @@ function TaskList() {
           )) : (<li className="task">There is not tasks</li>)
         }
       </ul>
-      <button className="btn btn-delete">
+      <button 
+        className="btn btn-delete" 
+        onClick={() => deleteProject(project.id)}
+      >
         Delete Project &times;
       </button>
     </Fragment>
