@@ -8,11 +8,7 @@ import { OPEN_FORM, GET_PROJECTS } from '../../types';
 function ProjectState(props) {
   const initialState = {
     openForm: false,
-    projects: [
-      { id: 1, name: 'Tienda Virtual' }, 
-      { id: 2, name: 'Web Design' }, 
-      { id: 3, name: 'Mobile App' }
-    ]
+    projects: []
   };
 
   const [state, dispatch] = useReducer(projectReducer, initialState);
@@ -26,7 +22,11 @@ function ProjectState(props) {
   const getProjects = () => {
     dispatch({
       type: GET_PROJECTS,
-      payload: null
+      payload: [
+        { id: 1, name: 'Tienda Virtual' }, 
+        { id: 2, name: 'Web Design' }, 
+        { id: 3, name: 'Mobile App' }
+      ]
     });
   }
 
@@ -35,7 +35,8 @@ function ProjectState(props) {
       value={{
         openForm: state.openForm,
         projects: state.projects,
-        showForm
+        showForm,
+        getProjects
       }}
     >
       {props.children}
