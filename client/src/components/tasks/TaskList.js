@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 import Task from './Task';
+
+import projectContext from '../../context/projects/projectContext';
 
 function TaskList() {
 
@@ -10,10 +12,14 @@ function TaskList() {
     {name: 'Select Payment Platform', state: false},
     {name: 'Select Hosting', state: true}
   ];
+
+  const { project } = useContext(projectContext);
   
+  if(!project) return <h2>Select a project!</h2>;
+
   return (
     <Fragment>
-      <h2>Project: Virtual Store</h2>
+      <h2>Project: {project.name}</h2>
       <ul className="list-tasks">
         { 
           tasks && 
