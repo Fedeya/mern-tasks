@@ -1,8 +1,20 @@
 import React from 'react';
 
+import Sidebar from '../layout/Sidebar';
+
 function Projects() {
   return (
-    <h1>Projects Works</h1>
+    <div className="container-app">
+      <Sidebar />
+
+      <div className="section-main">
+        <main>
+          <div className="container-tasks">
+
+          </div>
+        </main>
+      </div>
+    </div>
   );
 }
 
