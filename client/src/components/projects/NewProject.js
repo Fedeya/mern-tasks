@@ -5,10 +5,14 @@ import projectContext from '../../context/projects/projectContext';
 function NewProject() {
 
   const [name, setName] = useState('');
-  const { openForm, showForm } = useContext(projectContext);
+  const { openForm, showForm, addProject } = useContext(projectContext);
 
   const handleSubmit = e => {
     e.preventDefault();
+    if(name === '') return;
+
+    addProject(name);
+    setName('');
   }
 
   return (
