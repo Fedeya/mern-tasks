@@ -1,9 +1,10 @@
 import React, { useReducer } from 'react';
+import * as uuid from 'uuid';
 
 import TaskContext from './taskContext';
 import TaskReducer from './taskReducer';
 
-import { TASKS_PROJECT } from '../../types';
+import { TASKS_PROJECT, ADD_TASK } from '../../types';
 
 function TaskState(props) {
   const initialState = {
@@ -25,11 +26,19 @@ function TaskState(props) {
     });
   }
 
+  const addTask = (projectId, name) => {
+    dispatch({
+      type: ADD_TASK,
+      payload: { id: uuid.v4(), state: false, name, projectId }
+    });
+  }
+
   return (
     <TaskContext.Provider
       value={{
         tasks: state.projectTasks,
-        getTasks
+        getTasks,
+        addTask
       }}
     >
       {props.children}
