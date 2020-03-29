@@ -8,6 +8,8 @@ function ListProjects() {
 
   const { projects } = useContext(projectContext);
 
+  if(projects.length === 0) return null;
+
   return (
     <ul className="list-projects">
       {
