@@ -1,6 +1,7 @@
 import React from 'react';
 
-import  NewProject from '../projects/NewProject';
+import NewProject from '../projects/NewProject';
+import ProjectList from '../projects/ProjectList';
 
 function Sidebar() {
   return (
@@ -9,6 +10,7 @@ function Sidebar() {
       <NewProject />
       <div className="projects">
         <h2>Your Projects</h2>
+        <ProjectList />
       </div>
     </aside>
   );
