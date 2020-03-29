@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import projectContext from '../../context/projects/projectContext';
 
 function FormTask() {
+
+  const { project } = useContext(projectContext);
+
+  if(!project) return null;
+
   return (
     <div className="form">
       <form>
