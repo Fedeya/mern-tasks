@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Login() {
 
+  const [user, setUser] = useState({ email: '', password: '' });
+
   const handleChange = e => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if(user.email === '' || user.password === '') return;
 
   }
 
@@ -11,13 +24,14 @@ function Login() {
       <div className="container-form shadow-dark">
         <h1>Login</h1>
 
-        <form>
+        <form onSubmit={handleSubmit} >
           <div className="field-form">
             <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               name="email"
+              value={user.email}
               placeholder="Your Email"
               onChange={handleChange}
             />
@@ -28,6 +42,7 @@ function Login() {
               type="password"
               id="password"
               name="password"
+              value={user.password}
               placeholder="Your Password"
               onChange={handleChange}
             />
@@ -36,6 +51,9 @@ function Login() {
             <button className="btn btn-primary btn-block">Login</button>
           </div>
         </form>
+        <Link to="/register" className="link-account">
+          Don't have an account? Sign Up
+        </Link>
       </div>
     </div>
   );
