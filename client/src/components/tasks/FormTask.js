@@ -6,6 +6,7 @@ import taskContext from '../../context/tasks/taskContext';
 function FormTask() {
 
   const [name, setName] = useState('');
+  const [error, setError] = useState(false);
 
   const { project } = useContext(projectContext);
   const { addTask } = useContext(taskContext);
@@ -14,6 +15,13 @@ function FormTask() {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if(name.trim() === '') {
+      setError(true);
+      return;
+    }
+
+    setError(false);
     addTask(project.id, name);
     setName('');
   }
@@ -37,6 +45,12 @@ function FormTask() {
           </button>
         </div>
       </form>
+      {
+        error && (
+          <p className="message error">The name of tarea is required</p>
+        )
+      }
+
     </div>
   );
 }
