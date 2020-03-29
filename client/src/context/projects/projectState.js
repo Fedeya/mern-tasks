@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import projectContext from './projectContext';
 import projectReducer from './projectReducer';
 
-import { OPEN_FORM } from '../../types';
+import { OPEN_FORM, GET_PROJECTS } from '../../types';
 
 function ProjectState(props) {
   const initialState = {
@@ -20,6 +20,13 @@ function ProjectState(props) {
   const showForm = () => {
     dispatch({
       type: OPEN_FORM
+    });
+  }
+
+  const getProjects = () => {
+    dispatch({
+      type: GET_PROJECTS,
+      payload: null
     });
   }
 
