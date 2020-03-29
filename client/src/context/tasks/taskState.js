@@ -3,6 +3,8 @@ import React, { useReducer } from 'react';
 import TaskContext from './taskContext';
 import TaskReducer from './taskReducer';
 
+import { TASKS_PROJECT } from '../../types';
+
 function TaskState(props) {
   const initialState = {
     tasks: [
@@ -10,15 +12,24 @@ function TaskState(props) {
       {name: 'Select Colors', state: false, projectId: 1},
       {name: 'Select Payment Platform', state: false, projectId: 2},
       {name: 'Select Hosting', state: true, projectId: 3}
-    ]
+    ],
+    projectTasks: null
   };
 
   const [state, dispatch] = useReducer(TaskReducer, initialState);
 
+  const getTasks = id => {
+    dispatch({
+      type: TASKS_PROJECT,
+      payload: id
+    });
+  }
+
   return (
     <TaskContext.Provider
       value={{
-        tasks: state.tasks
+        tasks: state.projectTasks,
+        getTasks
       }}
     >
       {props.children}
