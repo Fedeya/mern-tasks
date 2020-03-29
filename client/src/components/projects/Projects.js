@@ -3,7 +3,8 @@ import React from 'react';
 import Sidebar from '../layout/Sidebar';
 import Header from '../layout/Header';
 
-import FormTask from '../tasks/FormTask'; 
+import FormTask from '../tasks/FormTask';
+import TaskList from '../tasks/TaskList';
 
 function Projects() {
   return (
@@ -16,6 +17,7 @@ function Projects() {
         <main>
           <FormTask />
           <div className="container-tasks">
+            <TaskList />
           </div>
         </main>
       </div>

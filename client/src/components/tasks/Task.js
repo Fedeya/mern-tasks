@@ -1,8 +1,31 @@
 import React from 'react';
 
-function Task() {
+function Task({ task }) {
   return (
-    <h1>Task Works!</h1>
+    <li className="task shadow">
+      <p>{task.name}</p>
+
+      <div className="state">
+        { 
+          task.state ?
+          (
+            <button className="complete">Complete</button>
+          ) 
+            :
+          (
+            <button className="incomplete">Incomplete</button>
+          ) 
+        }
+      </div>
+      <div className="actions">
+        <button className="btn btn-primary">
+          Edit
+        </button>
+        <button className="btn btn-secondary">
+          Delete
+        </button>
+      </div>
+    </li>
   );
 }
 
