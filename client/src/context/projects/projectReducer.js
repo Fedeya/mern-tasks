@@ -1,4 +1,4 @@
-import { OPEN_FORM, GET_PROJECTS, ADD_PROJECT } from '../../types';
+import { OPEN_FORM, GET_PROJECTS, ADD_PROJECT, ACTIVE_PROJECT } from '../../types';
 
 export default (state, action) => {
   switch(action.type) {
@@ -17,6 +17,11 @@ export default (state, action) => {
         ...state,
         projects: [...state.projects, action.payload],
         openForm: false
+      }
+    case ACTIVE_PROJECT:
+      return {
+        ...state,
+        project: action.payload
       }
     default:
       return state;
