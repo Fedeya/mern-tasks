@@ -10,8 +10,8 @@ export default (state, action) => {
     case ADD_TASK:
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
-        projectTasks: [...state.projectTasks, action.payload]
+        tasks: [action.payload, ...state.tasks],
+        projectTasks: [action.payload, ...state.projectTasks]
       }
     case DELETE_TASK:
       return {
