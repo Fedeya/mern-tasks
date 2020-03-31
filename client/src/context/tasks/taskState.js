@@ -4,7 +4,7 @@ import * as uuid from 'uuid';
 import TaskContext from './taskContext';
 import TaskReducer from './taskReducer';
 
-import { TASKS_PROJECT, ADD_TASK, DELETE_TASK } from '../../types';
+import { TASKS_PROJECT, ADD_TASK, DELETE_TASK, STATE_TASK } from '../../types';
 
 function TaskState(props) {
   const initialState = {
@@ -40,13 +40,21 @@ function TaskState(props) {
     });
   }
 
+  const stateTask = task => {
+    dispatch({
+      type: STATE_TASK,
+      payload: task
+    })
+  }
+
   return (
     <TaskContext.Provider
       value={{
         tasks: state.projectTasks,
         getTasks,
         addTask,
-        deleteTask
+        deleteTask,
+        stateTask
       }}
     >
       {props.children}
