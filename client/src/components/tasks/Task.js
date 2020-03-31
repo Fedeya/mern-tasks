@@ -4,7 +4,13 @@ import taskContext from '../../context/tasks/taskContext';
 
 function Task({ task }) {
 
-  const { deleteTask } = useContext(taskContext);
+  const { deleteTask, stateTask } = useContext(taskContext);
+
+  const handleClickState = () => {
+    task.state = !task.state;
+    console.log(task);
+    stateTask(task);
+  }
 
   return (
     <li className="task shadow">
@@ -14,11 +20,17 @@ function Task({ task }) {
         { 
           task.state ?
           (
-            <button className="complete">Complete</button>
+            <button 
+              className="complete"
+              onClick={handleClickState}
+            >Complete</button>
           ) 
             :
           (
-            <button className="incomplete">Incomplete</button>
+            <button 
+              className="incomplete"
+              onClick={handleClickState}
+            >Incomplete</button>
           ) 
         }
       </div>
