@@ -21,7 +21,7 @@ function TaskList() {
           tasks.length > 0 ? 
           tasks.map(task => (
               <Task task={task} key={task.id} />
-          )) : (<li className="task">There is not tasks</li>)
+          )) : (<li className="task"><p>There is not tasks</p></li>)
         }
       </ul>
       <button 
