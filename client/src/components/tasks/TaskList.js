@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Task from './Task';
 
@@ -10,22 +11,33 @@ function TaskList() {
   const { project, deleteProject } = useContext(projectContext);
   const { tasks } = useContext(TaskContext);
 
-  if(!project) return <h2>Select a project!</h2>;
+  if (!project) return <h2>Select a project!</h2>;
 
   return (
     <Fragment>
       <h2>Project: {project.name}</h2>
       <ul className="list-tasks">
-        { 
-          tasks && 
-          tasks.length > 0 ? 
-          tasks.map(task => (
-              <Task task={task} key={task.id} />
-          )) : (<li className="task"><p>There is not tasks</p></li>)
+        {
+          tasks &&
+            tasks.length > 0 ?
+            <TransitionGroup>
+              {
+                tasks.map(task => (
+                  <CSSTransition 
+                    key={task.id}
+                    timeout={200}
+                    classNames="task"
+                  >
+                    <Task task={task} />
+                  </CSSTransition>
+                ))
+              }
+            </TransitionGroup>
+            : (<li className="task"><p>There is not tasks</p></li>)
         }
       </ul>
-      <button 
-        className="btn btn-delete" 
+      <button
+        className="btn btn-delete"
         onClick={() => deleteProject(project.id)}
       >
         Delete Project &times;
