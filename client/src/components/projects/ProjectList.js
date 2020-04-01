@@ -11,6 +11,7 @@ function ListProjects() {
 
   useEffect(() => {
     getProjects();
+    // eslint-disable-next-line
   }, []);
 
   if (projects.length === 0) return <p>There are no projects, start by creating one</p>;
@@ -25,7 +26,7 @@ function ListProjects() {
               timeout={200}
               classNames="project"
             >
-              <Project project={project} key={project.id} />
+              <Project project={project} />
             </CSSTransition>
           ))
         }
