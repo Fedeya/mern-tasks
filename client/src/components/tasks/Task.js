@@ -4,11 +4,10 @@ import taskContext from '../../context/tasks/taskContext';
 
 function Task({ task }) {
 
-  const { deleteTask, stateTask } = useContext(taskContext);
+  const { deleteTask, stateTask, activeTask } = useContext(taskContext);
 
   const handleClickState = () => {
     task.state = !task.state;
-    console.log(task);
     stateTask(task);
   }
 
@@ -23,19 +22,26 @@ function Task({ task }) {
             <button 
               className="complete"
               onClick={handleClickState}
-            >Complete</button>
+            >
+              Complete
+            </button>
           ) 
             :
           (
             <button 
               className="incomplete"
               onClick={handleClickState}
-            >Incomplete</button>
+            >
+              Incomplete
+            </button>
           ) 
         }
       </div>
       <div className="actions">
-        <button className="btn btn-primary">
+        <button 
+          className="btn btn-primary"
+          onClick={() => activeTask(task)}
+        >
           Edit
         </button>
         <button 
