@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import projectContext from '../../context/projects/projectContext';
 import taskContext from '../../context/tasks/taskContext';
@@ -9,7 +9,13 @@ function FormTask() {
   const [error, setError] = useState(false);
 
   const { project } = useContext(projectContext);
-  const { addTask } = useContext(taskContext);
+  const { addTask, task, editTask, cleanTask } = useContext(taskContext);
+
+  useEffect(() => {
+    if(task) {
+      setName(task.name);
+    }
+  }, [task])
 
   if(!project) return null;
 
@@ -22,7 +28,13 @@ function FormTask() {
     }
 
     setError(false);
-    addTask(project.id, name);
+    
+    if(task) {
+      editTask(name);
+      cleanTask();
+    } else {
+      addTask(project.id, name);
+    }
     setName('');
   }
 
@@ -41,7 +53,7 @@ function FormTask() {
         </div>
         <div className="container-input">
           <button className="btn btn-primary btn-submit btn-block">
-            Add Task
+            { task ? 'Edit Task' :  'Add Task' }
           </button>
         </div>
       </form>
