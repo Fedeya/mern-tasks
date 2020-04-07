@@ -3,6 +3,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 require('./db');
 
+const auth = require('./middleware/auth');
+
 const app = express();
 
 // Config
@@ -19,7 +21,7 @@ app.use(express.json());
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/projects', require('./routes/projects'));
+app.use('/api/projects', auth, require('./routes/projects'));
 
 // Listen
 
