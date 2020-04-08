@@ -1,11 +1,15 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import AlertContext from '../../context/alerts/alertContext';
+import AuthContext from '../../context/authentication/authContext';
 
 function Register() {
 
   const { alert, showAlert } = useContext(AlertContext);
+  const { registryUser, message, auth } = useContext(AuthContext);
+
+  const history = useHistory();
 
   const [user, setUser] = useState({
     name: '',
@@ -13,6 +17,16 @@ function Register() {
     password: '',
     confirm: ''
   });
+
+  useEffect(() => {
+    if(message) {
+      showAlert(message.msg, message.category)
+    }
+
+    if(auth) {
+      history.push('/projects');
+    }
+  }, [auth, message, history]);
 
   const handleChange = e => {
     setUser({
@@ -45,7 +59,11 @@ function Register() {
       return;
     }
 
-    
+    registryUser({
+      name,
+      email,
+      password
+    });
 
   }
 
