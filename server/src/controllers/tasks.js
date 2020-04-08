@@ -45,10 +45,33 @@ exports.getTasks = async (req, res) => {
   }
 
   try {
-    const tasks = await Task.find({ project: req.body.project });
+    const tasks = await Task.find({ project: req.body.project }).sort({
+      createdAt: -1
+    });
     res.json(tasks);
   } catch(err) {
     return res.status(404).json({ msg: 'there was an error' });
   }
 
+}
+
+exports.updateTask = async (req, res) => {
+
+  const { name } = req.body;
+
+  try {
+    const project = await Project.findById(req.body.project);
+    if(project.author.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'not authorized' });
+    }
+  } catch (err) {
+    return res.status(404).json({ msg: 'project not found' });
+  }
+
+  try {
+    const task = await Task.findByIdAndUpdate(req.params.id, { name }, { new: true })
+    res.json(task);
+  } catch(err) {
+    res.status(500).json({ msg: 'there was an error' });
+  }
 }
