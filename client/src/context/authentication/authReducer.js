@@ -9,6 +9,7 @@ import {
 
 export default (state, action) => {
   switch(action.type) {
+    case LOGIN_SUCCESS:
     case REGISTRY_SUCCESS:
       localStorage.setItem('token', action.payload.token);
       return {

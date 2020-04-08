@@ -68,11 +68,37 @@ function AuthState(props) {
 
   }
 
+  const logIn = async data => {
+    try {
+      const res = await axiosClient.post('/auth', data);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data 
+      });
+
+      userAuthenticated();
+    }
+    catch(err) {
+
+      const alert = {
+        msg: err.response.data.msg || err.response.data.errors[0].msg,
+        category: 'alert-error'
+      }
+
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: alert
+      });
+    }
+  }
+
   return (
     <authContext.Provider
       value={{
         ...state,
-        registryUser
+        registryUser,
+        logIn
       }}
     >
       {props.children}
