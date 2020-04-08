@@ -14,3 +14,10 @@ export const CLEAN_TASK = 'CLEAN_TASK';
 
 export const SHOW_ALERT = 'SHOW_ALERT';
 export const HIDE_ALERT = 'HIDE_ALERT';
+
+export const REGISTRY_SUCCESS = 'REGISTRY_SUCCESS';
+export const REGISTRY_ERROR = 'REGISTRY_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOG_OUT = 'LOG_OUT';
+export const GET_USER = 'GET_USER';
