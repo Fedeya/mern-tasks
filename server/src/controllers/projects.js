@@ -68,3 +68,22 @@ exports.updateProject = async (req, res) => {
   }
 
 }
+
+exports.deleteProject = async (req, res) => {
+  try {
+    let project = await Project.findById(req.params.id);
+    
+    if(project.author.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'not authorized' });
+    }
+
+    project = await Project.findByIdAndDelete(req.params.id);
+
+    res.json(project);
+
+  } catch(err) {
+    res.status(500).json({
+      msg: 'there was an error'
+    })
+  }
+}
