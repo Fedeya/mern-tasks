@@ -1,9 +1,28 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+
+import AlertContext from '../../context/alerts/alertContext';
+import AuthContext from '../../context/authentication/authContext';
 
 function Login() {
 
+  const { alert, showAlert } = useContext(AlertContext);
+  const { message, auth, logIn } = useContext(AuthContext);
+
+  const history = useHistory();
+
   const [user, setUser] = useState({ email: '', password: '' });
+
+  useEffect(() => {
+    if(message) {
+      showAlert(message.msg, message.category);
+    }
+
+    if(auth) {
+      history.push('/projects');
+    }
+    // eslint-disable-next-line
+  }, [message, auth, history]);
 
   const handleChange = e => {
     setUser({
@@ -15,12 +34,18 @@ function Login() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if(user.email === '' || user.password === '') return;
+    if(user.email.trim() === '' || user.password.trim() === '') {
+      showAlert('All fields is required', 'alert-error');
+      return;
+    }
+
+    logIn(user);
 
   }
 
   return (
     <div className="form-user">
+      { alert && (<div className={`alert ${alert.category}`}>{alert.msg}</div>) }
       <div className="container-form shadow-dark">
         <h1>Login</h1>
 
@@ -45,6 +70,7 @@ function Login() {
               value={user.password}
               placeholder="Your Password"
               onChange={handleChange}
+              autoComplete="on"
             />
           </div>
           <div className="field-form">
