@@ -75,3 +75,28 @@ exports.updateTask = async (req, res) => {
     res.status(500).json({ msg: 'there was an error' });
   }
 }
+
+exports.deleteTask = async (req, res) => {
+
+  try {
+    const project = await Project.findById(req.body.project);
+    if(project.author.toString() !== req.user.id) {
+      res.status(401).json({ msg: 'not authorized' });
+    }
+  } catch(err) {
+    res.status(404).json({ msg: 'project not found' });
+  }
+
+  try {
+    const task = await Task.findById(req.param.id);
+    if(!task) {
+      return res.status(404).json({ msg: 'task not found' });
+    }
+    await Task.findByIdAndDelete(req.params.id);
+    res.json(task);
+  } catch(err) {
+    res.status(500).json({ msg: 'there was an error' });
+  }
+
+
+}
