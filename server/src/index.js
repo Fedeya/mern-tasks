@@ -22,6 +22,7 @@ app.use(express.json());
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', auth, require('./routes/projects'));
+app.use('/api/tasks', auth, require('./routes/tasks'));
 
 // Listen
 
