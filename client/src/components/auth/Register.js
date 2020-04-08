@@ -22,10 +22,11 @@ function Register() {
     if(message) {
       showAlert(message.msg, message.category)
     }
-
+    
     if(auth) {
       history.push('/projects');
     }
+    // eslint-disable-next-line
   }, [auth, message, history]);
 
   const handleChange = e => {
