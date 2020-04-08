@@ -1,15 +1,21 @@
 const { Router } = require('express');
 const router = Router();
 
-const { createTask, getTasks } = require('../controllers/tasks');
+const { createTask, getTasks, updateTask } = require('../controllers/tasks');
 const { check } = require('express-validator');
 
 // api/tasks
 router.route('/')
   .get(getTasks)
   .post([
-    check('name', 'the name of tasks is required').not().isEmpty(),
+    check('name', 'the name of task is required').not().isEmpty(),
     check('project', 'the project is required').not().isEmpty()
   ], createTask)
+
+router.route('/:id')
+  .put([
+    check('name', 'the name of task is required').not().isEmpty(),
+    check('project', "the project is required").not().isEmpty()
+  ], updateTask)
 
 module.exports = router;
