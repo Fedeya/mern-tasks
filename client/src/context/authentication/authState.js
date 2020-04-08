@@ -60,7 +60,6 @@ function AuthState(props) {
         payload: res.data
       })
     } catch(err) {
-      console.log(err.response);
       dispatch({
         type: LOGIN_ERROR
       })
@@ -93,12 +92,20 @@ function AuthState(props) {
     }
   }
 
+  const logOut = async () => {
+    dispatch({
+      type: LOG_OUT
+    })
+  }
+
   return (
     <authContext.Provider
       value={{
         ...state,
         registryUser,
-        logIn
+        logIn,
+        userAuthenticated,
+        logOut
       }}
     >
       {props.children}
