@@ -24,7 +24,7 @@ function TaskList() {
               {
                 tasks.map(task => (
                   <CSSTransition 
-                    key={task.id}
+                    key={task._id}
                     timeout={200}
                     classNames="task"
                   >
@@ -38,7 +38,7 @@ function TaskList() {
       </ul>
       <button
         className="btn btn-delete"
-        onClick={() => deleteProject(project.id)}
+        onClick={() => deleteProject(project._id)}
       >
         Delete Project &times;
       </button>

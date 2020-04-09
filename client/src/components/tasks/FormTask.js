@@ -30,10 +30,10 @@ function FormTask() {
     setError(false);
     
     if(task) {
-      editTask(name);
+      editTask(name, project._id);
       cleanTask();
     } else {
-      addTask(project.id, name);
+      addTask(project._id, name);
     }
     setName('');
   }

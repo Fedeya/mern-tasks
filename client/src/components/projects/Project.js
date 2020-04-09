@@ -10,7 +10,7 @@ function Project({ project }) {
 
   const handleClick = () => {
     activeProject(project);
-    getTasks(project.id);
+    getTasks(project._id);
   }
 
   return (

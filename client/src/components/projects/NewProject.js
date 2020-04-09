@@ -1,12 +1,14 @@
 import React, { Fragment, useState, useContext } from 'react';
 
 import projectContext from '../../context/projects/projectContext';
+import alertContext from '../../context/alerts/alertContext';
 
 function NewProject() {
 
   const [name, setName] = useState('');
   const [error, setError] = useState(false);
   const { openForm, showForm, addProject } = useContext(projectContext);
+  const { showAlert, alert } = useContext(alertContext);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,11 +20,13 @@ function NewProject() {
 
     setError(false);
     addProject(name);
+    showAlert(`The project ${name} is created`, 'alert-ok');
     setName('');
   }
 
   return (
     <Fragment>
+      { alert && (<div className={`alert ${alert.category}`}>{alert.msg}</div>) }
       <button className="btn btn-block btn-primary" onClick={showForm}>
         New Project
       </button>

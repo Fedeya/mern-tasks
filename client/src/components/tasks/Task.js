@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 
 import taskContext from '../../context/tasks/taskContext';
+import projectContext from '../../context/projects/projectContext';
 
 function Task({ task }) {
 
   const { deleteTask, stateTask, activeTask } = useContext(taskContext);
+  const { project } = useContext(projectContext);
 
   const handleClickState = () => {
     task.state = !task.state;
@@ -46,7 +48,7 @@ function Task({ task }) {
         </button>
         <button 
           className="btn btn-secondary"
-          onClick={() => deleteTask(task.id)}
+          onClick={() => deleteTask(task._id, project._id)}
         >
           Delete
         </button>
