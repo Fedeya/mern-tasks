@@ -1,10 +1,11 @@
 import React, { useReducer } from 'react';
-import * as uuid from 'uuid';
 
 import projectContext from './projectContext';
 import projectReducer from './projectReducer';
 
 import { OPEN_FORM, GET_PROJECTS, ADD_PROJECT, ACTIVE_PROJECT, DELETE_PROJECT } from '../../types';
+
+import axiosClient from '../../config/axios';
 
 function ProjectState(props) {
   const initialState = {
@@ -21,22 +22,29 @@ function ProjectState(props) {
     });
   }
 
-  const getProjects = () => {
-    dispatch({
-      type: GET_PROJECTS,
-      payload: [
-        { id: 1, name: 'Tienda Virtual' }, 
-        { id: 2, name: 'Web Design' }, 
-        { id: 3, name: 'Mobile App' }
-      ]
-    });
+  const getProjects = async () => {
+    try {
+      const res = await axiosClient.get('/projects');
+      dispatch({
+        type: GET_PROJECTS,
+        payload: res.data
+      });
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-  const addProject = name => {
-    dispatch({
-      type: ADD_PROJECT,
-      payload: { id: uuid.v4(), name }
-    });
+  const addProject = async name => {
+    try {
+
+      const res = await axiosClient.post('/projects', { name });
+      dispatch({
+        type: ADD_PROJECT,
+        payload: res.data
+      });
+    } catch(err) {
+      console.log(err.response);
+    }
   }
 
   const activeProject = project => {
@@ -45,12 +53,17 @@ function ProjectState(props) {
       payload: project
     });
   }
-  
-  const deleteProject = id => {
-    dispatch({
-      type: DELETE_PROJECT,
-      payload: id
-    });
+
+  const deleteProject = async id => {
+    try {
+      await axiosClient.delete(`/projects/${id}`);
+      dispatch({
+        type: DELETE_PROJECT,
+        payload: id
+      });
+    } catch(err) {
+      console.log(err.response);
+    }
   }
 
   return (
