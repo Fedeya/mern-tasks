@@ -34,7 +34,7 @@ exports.createTask = async (req, res) => {
 
 exports.getTasks = async (req, res) => {
   try {
-    const project = await Project.findById(req.body.project);
+    const project = await Project.findById(req.query.project);
     
     if(project.author.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'not authorized' })
@@ -45,7 +45,7 @@ exports.getTasks = async (req, res) => {
   }
 
   try {
-    const tasks = await Task.find({ project: req.body.project }).sort({
+    const tasks = await Task.find({ project: req.query.project }).sort({
       createdAt: -1
     });
     res.json(tasks);
@@ -57,8 +57,6 @@ exports.getTasks = async (req, res) => {
 
 exports.updateTask = async (req, res) => {
 
-  const { name } = req.body;
-
   try {
     const project = await Project.findById(req.body.project);
     if(project.author.toString() !== req.user.id) {
@@ -69,7 +67,7 @@ exports.updateTask = async (req, res) => {
   }
 
   try {
-    const task = await Task.findByIdAndUpdate(req.params.id, { name }, { new: true })
+    const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.json(task);
   } catch(err) {
     res.status(500).json({ msg: 'there was an error' });
@@ -77,9 +75,8 @@ exports.updateTask = async (req, res) => {
 }
 
 exports.deleteTask = async (req, res) => {
-
   try {
-    const project = await Project.findById(req.body.project);
+    const project = await Project.findById(req.query.project);
     if(project.author.toString() !== req.user.id) {
       res.status(401).json({ msg: 'not authorized' });
     }
@@ -88,7 +85,7 @@ exports.deleteTask = async (req, res) => {
   }
 
   try {
-    const task = await Task.findById(req.param.id);
+    const task = await Task.findById(req.params.id);
     if(!task) {
       return res.status(404).json({ msg: 'task not found' });
     }
